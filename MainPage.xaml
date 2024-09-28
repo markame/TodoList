@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TodoList.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <!--  Entrada de Texto para adicionar nova tarefa  -->
+            <Entry x:Name="taskEntry" Placeholder="Digite sua tarefa" />
+
+            <!--  Seletor de Categoria  -->
+            <Picker x:Name="categoryPicker" Title="Selecione a Categoria">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Trabalho</x:String>
+                        <x:String>Estudo</x:String>
+                        <x:String>Pessoal</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <!--  Seletor de Data de Vencimento  -->
+            <DatePicker x:Name="dueDatePicker" />
+
+            <!--  Botão para adicionar tarefa  -->
+            <Button Clicked="OnAddTaskClicked" Text="Adicionar Tarefa" />
+
+            <!--  Lista de tarefas  -->
+            <ListView x:Name="tasksListView" Margin="0,20,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <StackLayout Padding="10" Orientation="Vertical">
+                                    <Label Text="{Binding TaskName}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Category}" VerticalOptions="Center" />
+                                    <Label Text="{Binding DueDate}" VerticalOptions="Center" />
+                                    <Label Text="  " />
+                                </StackLayout>
+                                <Frame CornerRadius="1">
+                                    <Button
+                                        Clicked="OnCompleteTaskClicked"
+                                        Text="Concluir"
+                                        TextColor="White" />
+                                </Frame>
+                                <Frame CornerRadius="1">
+                                    <Button
+                                        Clicked="OnDeleteTaskClicked"
+                                        Text="Excluir"
+                                        TextColor="White" />
+                                </Frame>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
